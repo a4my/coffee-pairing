@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import userIcon from '../img/user-icon.svg';
 
 function NameList({ names, onAddName, onRemoveName }) {
   const [newName, setNewName] = useState('');
@@ -15,15 +16,17 @@ function NameList({ names, onAddName, onRemoveName }) {
   };
 
   return (
-    <div>
-      <h2 className='name-title'>Names</h2>
-      <input type="text" value={newName} onChange={handleInputChange} />
-      <button  onClick={handleAddName}>Add</button>
-      <ul>
+    <div className="name-list-container"> 
+      <div className="input-container"> 
+        <input type="text" placeholder="Add a name" value={newName} onChange={handleInputChange} />
+        <button className="button-action" onClick={handleAddName}>Add</button>
+      </div>
+      <ul className="name-list"> 
         {names.map((name, index) => (
-          <li key={index}>
+          <li key={index} className="name-item">
+            <img src={userIcon} alt="user icon" className="user-icon" />
             {name}
-            <button onClick={() => onRemoveName(index)}>X</button>
+            <button className="button-remove" onClick={() => onRemoveName(index)}>X</button>
           </li>
         ))}
       </ul>

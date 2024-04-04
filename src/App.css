@@ -70,7 +70,7 @@ body {
   height: auto;
 }
 
-button {
+.button-action {
   background-image: linear-gradient(90deg, #ff1e00 0%, #ec008c 65%);
   background-size: 300% 100%;
   font-size: 16px;
@@ -81,19 +81,35 @@ button {
   text-decoration: none;
   padding: 10px 20px;
   margin-left: 10px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-button:hover {
+.button-action:hover {
   background-position: 100% 0;
   background-color: #f0f0f0;
   background-image: none;
   color: #ec008c;
   border: 2px solid #ec008c;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.button-action {
-  margin-top: 20px;
+.button-remove {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid #ec008c;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+  color: #ec008c;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.button-remove:hover {
+  background-color: #ec008c;
+  color: #f0f0f0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+
 }
 
 input {
@@ -104,13 +120,54 @@ input {
   width: 50%;
 }
 
+input[type="text"] {
+  color: #FF017E;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 input:focus {
   outline: none;
   border: 2px solid #FF017E;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+input::placeholder {
+  color: lightgray;
+}
+
+
 ul > li {
   list-style-type: none;
   margin-bottom: 10px;
+}
+
+.name-list-container {
+  text-align: center; 
+}
+
+.input-container {
+  margin-bottom: 10px; 
+}
+
+.name-list {
+  list-style: none; 
+  padding: 0;
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+}
+
+.name-item {
+  border-radius: 10px;
+  margin: 5px; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  display: flex;
+  align-items: center; 
+  color: #888;
+}
+
+.user-icon {
+  margin-right: 10px;
 }
