@@ -119,6 +119,10 @@ body {
 
 }
 
+.button-add-employee {
+  padding: 5px 10px !important;
+}
+
 input {
   border: 2px solid #FF017E;
   border-radius: 30px;

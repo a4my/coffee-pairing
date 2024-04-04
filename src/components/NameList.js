@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import userIcon from '../img/user-icon.svg';
+ import userIconWhite from '../img/user-icon-white.svg';
+import { employeeList } from '../employeeList'; //
 
 function NameList({ names, onAddName, onRemoveName }) {
   const [newName, setNewName] = useState('');
@@ -15,10 +17,23 @@ function NameList({ names, onAddName, onRemoveName }) {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAddName();
+    }
+  };
+
+  const handleAddEmployee = () => {
+    employeeList.forEach((employee) => {
+      onAddName(employee.name);
+    });
+  };
+
   return (
     <div className="name-list-container"> 
       <div className="input-container"> 
-        <input type="text" placeholder="Add a name" value={newName} onChange={handleInputChange} />
+        <button className="button-action button-add-employee" onClick={handleAddEmployee}><img src={userIconWhite} alt='add all employees'/></button>
+        <input type="text" placeholder="Add a name" value={newName} onChange={handleInputChange} onKeyDown={handleKeyPress}/>
         <button className="button-action" onClick={handleAddName}>Add</button>
       </div>
       <ul className="name-list"> 
