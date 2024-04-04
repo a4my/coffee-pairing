@@ -66,10 +66,12 @@ function App() {
       <h1 className="appTitle">ETV Coffee Roulette</h1>
       <div className="appContent">
         <NameList names={names} onAddName={handleAddName} onRemoveName={handleRemoveName} />
-        <button className="button-action" onClick={handleRemoveAllNames}>Remove All</button>
-        <Roulette onPairNames={handlePairNames} />
-        <PairingsTable pairings={pairings} />
-        <button className="button-action" onClick={handleResetPairings}>Reset Pairings</button>
+        <div className="buttons-container">
+          <button className="button-action" onClick={handleRemoveAllNames}>Remove All Names</button>
+          <Roulette onPairNames={handlePairNames} />
+          {/* <PairingsTable pairings={pairings} /> */}
+          <button className="button-action" onClick={handleResetPairings}>Reset Pairings</button>
+        </div>
       </div>
       <div className='footer-container'>
         <img src={footerImage} alt="Footer" className="footer" />
