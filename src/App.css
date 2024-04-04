@@ -1,38 +1,116 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
 .App {
+  position: relative;
   text-align: center;
+  margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.popup {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo {
+  position: absolute;
+  left: 20px;
+  top: -40px;
+  height: 60px;
+}
+
+.footer-container {
+  position: fixed;
+  bottom: 0;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 20px;
+  background-color: #FC0100;
+  width: 100%;
+}
+
+.footer {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.appTitle, .paringTitle, .rouletteTitle{
+  margin-top: 50px;
+  color: #FF017E;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.name-title {
+  color: #FF017E;
+
+}
+
+.appContent {
+  margin: 50px auto 0 auto;
+  max-width: 800px;
+  height: auto;
+}
+
+button {
+  background-image: linear-gradient(90deg, #ff1e00 0%, #ec008c 65%);
+  background-size: 300% 100%;
+  font-size: 16px;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  transition: all 0.5s ease-in-out;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-position: 100% 0;
+  background-color: #f0f0f0;
+  background-image: none;
+  color: #ec008c;
+  border: 2px solid #ec008c;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.button-action {
+  margin-top: 20px;
+}
+
+input {
+  border: 2px solid #FF017E;
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin: 10px;
+  width: 50%;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #FF017E;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+ul > li {
+  list-style-type: none;
+  margin-bottom: 10px;
 }
