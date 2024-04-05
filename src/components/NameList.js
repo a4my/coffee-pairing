@@ -1,45 +1,63 @@
-import React, { useState } from 'react'
-import userIcon from '../img/user-icon.svg'
-import userIconWhite from '../img/user-icon-white.svg'
-import { employeeList } from '../employeeList'
+import React, { useState } from 'react';
+import userIcon from '../img/user-icon.svg';
+import userIconWhite from '../img/user-icon-white.svg';
+import userIconHover from '../img/user-icon-hover.svg';
+import plusSymbolWhite from '../img/plus-symbol.svg';
+import plusSymbolHover from '../img/plus-symbol-hover.svg';
 
-function NameList({ names, allEmployeesList, onAddName, onRemoveName }) {
-  const [newName, setNewName] = useState('')
-  const [displayEmployeeList, setDisplayEmployeeList] = useState([])
+function NameList({ names, onAddName, onRemoveName, onAddAllNames }) {
+  const [newName, setNewName] = useState('');
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPlusHovered, setIsPlusHovered] = useState(false);
 
   const handleInputChange = e => {
-    setNewName(e.target.value)
-  }
+    setNewName(e.target.value);
+  };
 
   const handleAddName = () => {
     if (newName.trim()) {
-      onAddName(newName.trim())
-      setNewName('')
+      const capitalizedNewName =
+        newName.charAt(0).toUpperCase() + newName.slice(1);
+      onAddName(capitalizedNewName);
+      setNewName('');
     }
-  }
+  };
 
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
-      handleAddName()
+      handleAddName();
     }
-  }
+  };
 
-  const handleAddEmployees = () => {
-    setDisplayEmployeeList(employeeList.map(employee => employee.name))
-  }
+  const handleMouseEnter = () => {
+    setIsHovered(true); 
+  };
 
-  // Decide which list to display based on displayEmployeeList
-  const displayList =
-    displayEmployeeList.length > 0 ? displayEmployeeList : names
+  const handleMouseLeave = () => {
+    setIsHovered(false); 
+  };
+
+  const handlePlusMouseEnter = () => {
+    setIsPlusHovered(true); 
+  };
+
+  const handlePlusMouseLeave = () => {
+    setIsPlusHovered(false); 
+  };
 
   return (
     <div className="name-list-container">
       <div className="input-container">
         <button
           className="button-action button-add-employee"
-          onClick={handleAddEmployees}
+          onClick={onAddAllNames}
+          onMouseEnter={handleMouseEnter} 
+          onMouseLeave={handleMouseLeave} 
         >
-          <img src={userIconWhite} alt="add all employees" />
+          <img
+            src={isHovered ? userIconHover : userIconWhite}
+            alt="add all employees"
+          />
         </button>
         <input
           type="text"
@@ -48,12 +66,16 @@ function NameList({ names, allEmployeesList, onAddName, onRemoveName }) {
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
         />
-        <button className="button-action" onClick={handleAddName}>
-          Add
+        <button className="button-action" onClick={handleAddName} onMouseEnter={handlePlusMouseEnter} 
+          onMouseLeave={handlePlusMouseLeave} >
+        <img
+            src={isPlusHovered ? plusSymbolHover : plusSymbolWhite}
+            alt="add all employees"
+          />
         </button>
       </div>
       <ul className="name-list">
-        {displayList.map((name, index) => (
+        {names.map((name, index) => (
           <li key={index} className="name-item">
             <img src={userIcon} alt="user icon" className="user-icon" />
             {name}
@@ -67,7 +89,7 @@ function NameList({ names, allEmployeesList, onAddName, onRemoveName }) {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
-export default NameList
+export default NameList;

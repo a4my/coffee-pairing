@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import NameList from './components/NameList'
 import Roulette from './components/Roulette'
 import { loadNames, saveNames } from './utils'
+import { employeeList } from './employeeList'
 import everyoneTVLogo from './img/ETV_logo.svg'
 import footerImage from './img/ETV_footer.png'
 import './App.css'
@@ -9,6 +10,8 @@ import './App.css'
 function App() {
   const [names, setNames] = useState([])
   const [pairings, setPairings] = useState([])
+  const [displayEmployeeList, setDisplayEmployeeList] = useState([])
+
 
   useEffect(() => {
     const storedNames = loadNames()
@@ -25,6 +28,11 @@ function App() {
     updatedNames.splice(index, 1)
     setNames(updatedNames)
     saveNames(updatedNames)
+  }
+
+  const handleAddEmployees = () => {
+    setDisplayEmployeeList(employeeList.map(employee => employee.name))
+    setNames(displayEmployeeList)
   }
 
   const handlePairNames = () => {
@@ -64,6 +72,7 @@ function App() {
           names={names}
           onAddName={handleAddName}
           onRemoveName={handleRemoveName}
+          onAddAllNames={handleAddEmployees}
         />
         <div className="buttons-container">
           <button className="button-action" onClick={handleRemoveAllNames}>

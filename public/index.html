@@ -4,10 +4,123 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
+    
     <title>ETV Coffee Roulette</title>
+    <style>
+      .loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        background: radial-gradient(ellipse at center, #fff 0%, #21506b 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100vw;
+      }
+
+      .loader-container.fade-out {
+        top: -120%;
+      }
+
+      .loader {
+        margin-top: 100px;
+        width: 200px;
+        height: 200px;
+        position: relative;
+      }
+
+      .loader .outer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-left: 5px solid #2c698d;
+        border-right: 5px solid #2c698d;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-radius: 50%;
+        animation: rotate28 2s linear infinite;
+      }
+
+      .loader .middle {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        right: 30px;
+        bottom: 30px;
+        border-left: 5px solid #45a3da;
+        border-right: 5px solid #45a3da;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-radius: 50%;
+        animation: rotate28 2s linear infinite reverse;
+      }
+
+      .loader .inner {
+        position: absolute;
+        top: 60px;
+        left: 60px;
+        right: 60px;
+        bottom: 60px;
+        border-left: 5px solid #2c698d;
+        border-right: 5px solid #2c698d;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-radius: 50%;
+        animation: rotate28 2s linear infinite;
+      }
+
+      .loader .circle {
+        position: absolute;
+        top: 90px;
+        right: 90px;
+        left: 90px;
+        bottom: 90px;
+        background-color: #45a3da;
+        border-radius: 50%;
+      }
+
+      @keyframes rotate28 {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <div class="loader-container">
+        <div class="loader">
+          <div class="outer"></div>
+          <div class="middle"></div>
+          <div class="inner"></div>
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
   </body>
-</html>
+    <script>
+      
+      // const loaderContainer = document.querySelector('.loader-container');
+
+      // function loader() {
+      //   loaderContainer.classList.add('fade-out');
+      // }
+      
+      // function fadeOut() {
+      //   setInterval(loader, 4000);
+      // }
+
+      // fadeOut();
+    
+  </script>
+  
+  </html>
