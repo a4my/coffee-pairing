@@ -2,18 +2,26 @@
 import React, { useState, useEffect } from 'react'
 import NameList from './components/NameList'
 import Roulette from './components/Roulette'
+import Loader from './components/Loader';
 import { loadNames, saveNames } from './utils'
 import { employeeList } from './employeeList'
 import everyoneTVLogo from './img/ETV_logo.svg'
 import footerImage from './img/ETV_footer.png'
 import cupLogo from './img/cup.svg'
-import './App.css'
+import './sass/App.scss'
 
 function App() {
   const [names, setNames] = useState([])
   const [pairings, setPairings] = useState([])
   const [displayEmployeeList, setDisplayEmployeeList] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+  }, []);
 
   useEffect(() => {
     const storedNames = loadNames()
@@ -75,7 +83,7 @@ function App() {
 
   return (
     <div className="App">
-      <img src={everyoneTVLogo} alt="EveryoneTV Logo" className="logo" />
+      {isLoading ? <Loader /> : <><img src={everyoneTVLogo} alt="EveryoneTV Logo" className="logo" />
       <div className='title-container'>
       <h1 className="appTitle">ETV Coffee Roulette</h1>
       <img src={cupLogo} alt="cup logo" className="logo-cup"/>
@@ -91,7 +99,7 @@ function App() {
         />
         <div className="buttons-container">
           <button className="button-action" onClick={handleRemoveAllNames}>
-            Remove All Names
+            Remove All
           </button>
           <Roulette onPairNames={handlePairNames} />
           {/* <PairingsTable pairings={pairings} /> */}
@@ -103,6 +111,7 @@ function App() {
       <div className="footer-container">
         <img src={footerImage} alt="Footer" className="footer" />
       </div>
+      </>}
     </div>
   )
 }

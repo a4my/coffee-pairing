@@ -1,0 +1,48 @@
+// Button Styles
+
+.buttons-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30px;
+
+  .button-action {
+    padding: 10px 20px;
+  }
+}
+
+.button-action {
+  @include button-styles;
+
+  &:hover {
+    background-position: 100% 0;
+    background-color: $light-gray;
+    background-image: none;
+    color: $secondary-color;
+    border: 2px solid $secondary-color;
+  }
+
+  .button-input {
+    margin-top: 5px;
+  }
+}
+
+.button-x-remove {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid $secondary-color;
+  background-color: $white;
+  transition: all 0.3s ease-in-out;
+  color: $secondary-color;
+  font-weight: bold;
+  margin-left: $spacing-medium;
+
+  &:hover {
+    background-color: $secondary-color;
+    color: $light-gray;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+

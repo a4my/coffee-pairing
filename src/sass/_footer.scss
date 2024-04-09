@@ -1,0 +1,18 @@
+// Footer Component Styles
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $spacing-medium;
+  background-color: $red;
+  width: 100%;
+}
+
+.footer {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+

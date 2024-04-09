@@ -1,0 +1,70 @@
+// NameList Component Styles
+.name-list-container {
+  text-align: center;
+}
+
+.input-container {
+  @include displayFlex;
+  margin-bottom: $spacing-medium;
+  position: relative;
+}
+
+.input-container input {
+  border: 2px solid $primary-color;
+  border-radius: 30px;
+  padding: $spacing-medium $spacing-large;
+  margin: $spacing-medium;
+  width: 50%;
+  color: $primary-color;
+  font-size: 16px;
+  font-weight: bold;
+
+  &:focus {
+    outline: none;
+    border: 2px solid $primary-color;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  &::placeholder {
+    color: $light-gray;
+  }
+}
+
+.warning-icon {
+  margin-right: 10px;
+}
+
+.error-message {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff017e;
+  bottom: -15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.name-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.name-item {
+  border-radius: 10px;
+  margin: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  color: #888;
+}
+
+.user-icon {
+  margin-right: 10px;
+}

@@ -58,7 +58,7 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
     <div className="name-list-container">
       <div className="input-container">
         <button
-          className="button-action button-add-employee"
+          className="button-action button-input"
           onClick={onAddAllNames}
           onMouseEnter={handleMouseEnter} 
           onMouseLeave={handleMouseLeave} 
@@ -75,7 +75,7 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
         />
-        <button className="button-action" onClick={handleAddName} onMouseEnter={handlePlusMouseEnter} 
+        <button className="button-action button-input" onClick={handleAddName} onMouseEnter={handlePlusMouseEnter} 
           onMouseLeave={handlePlusMouseLeave} >
         <img
             src={isPlusHovered ? plusSymbolHover : plusSymbolWhite}
@@ -90,7 +90,7 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
             <img src={userIcon} alt="user icon" className="user-icon" />
             {name}
             <button
-              className="button-remove"
+              className="button-x-remove"
               onClick={() => onRemoveName(index)}
             >
               X

@@ -17,7 +17,7 @@ function Roulette({ onPairNames }) {
   return (
     <div>
       {/* <h2 className="rouletteTitle">Roulette</h2> */}
-      <button className="button-action" onClick={handlePairNames}>Pair Names</button>
+      <button className="button-action" onClick={handlePairNames}>Pair People</button>
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
