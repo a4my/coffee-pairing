@@ -13,7 +13,8 @@ function Pairing({ names, onPair }) {
     } else {
       setFirstRender(false);
     }
-  }, [pairingSize]); // Trigger handlePair() when pairingSize changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pairingSize]);
 
   const handlePair = () => {
     const availableNames = [...names];
@@ -37,7 +38,11 @@ function Pairing({ names, onPair }) {
   };
 
   const handlePairingSize = (size) => {
-    setPairingSize(size);
+    if(size !== pairingSize) {
+      setPairingSize(size);
+    } else {
+      handlePair();
+    }
   };
 
   return (

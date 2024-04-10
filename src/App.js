@@ -13,7 +13,6 @@ import './sass/App.scss';
 function App() {
   const [names, setNames] = useState([]);
   const [pairings, setPairings] = useState([]);
-  const [displayEmployeeList, setDisplayEmployeeList] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [rouletteLoading, setRouletteLoading] = useState(false); 
@@ -50,8 +49,10 @@ function App() {
   };
 
   const handleAddEmployees = () => {
-    setDisplayEmployeeList(employeeList.map((employee) => employee.name));
-    setNames(displayEmployeeList);
+    let allEmployeeNames = employeeList.map((employee) => employee.name); 
+    // setNames(employeeList.map((employee) => employee.name));
+    setNames(allEmployeeNames);
+    saveNames(allEmployeeNames);
   };
 
   const handleRemoveAllNames = () => {
