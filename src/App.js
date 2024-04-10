@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NameList from './components/NameList';
 import Pairing from './components/Pairing';
 import Loader from './components/Loader';
+import RouletteLoader from './components/Roulette'; // Import the RouletteLoader component
 import { loadNames, saveNames } from './utils';
 import { employeeList } from './employeeList';
 import everyoneTVLogo from './img/ETV_logo.svg';
@@ -15,6 +16,7 @@ function App() {
   const [displayEmployeeList, setDisplayEmployeeList] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [rouletteLoading, setRouletteLoading] = useState(false); // New state for roulette loading
 
   useEffect(() => {
     setTimeout(() => {
@@ -59,6 +61,10 @@ function App() {
 
   const handlePair = (pairs) => {
     setPairings(pairs);
+    setRouletteLoading(true); // Start roulette spinning when pairing starts
+    setTimeout(() => {
+      setRouletteLoading(false);
+    }, 3000); // Stop spinning after 3 seconds
   };
 
   return (
@@ -84,8 +90,8 @@ function App() {
             />
             <Pairing names={names} onPair={handlePair} setIsLoading={setIsLoading}/>
             <div className="pairing-result-container">
-              {isLoading ? (
-                <Loader />
+              {rouletteLoading ? (
+                <RouletteLoader />
               ) : (
                 pairings.map((pair, index) => (
                   <div key={index} className="pairing-result">

@@ -1,24 +1,21 @@
-.loader-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background: radial-gradient(ellipse at center, #fff 0%, #f0f0f0 100%);
+// roulette.css
+.roulette-container {
+    // background: radial-gradient(ellipse at center, #fff 0%, #f0f0f0 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 100vw;
+    width: 100%;
   }
   
-  .loader {
-    margin-top: 100px;
+  .roulette {
+    margin-top: 40px;
     width: 200px;
     height: 200px;
     position: relative;
   }
   
-  .loader .outer {
+  .roulette .outer {
     position: absolute;
     top: 0;
     left: 0;
@@ -32,7 +29,7 @@
     animation: rotate28 2s linear infinite;
   }
   
-  .loader .middle {
+  .roulette .middle {
     position: absolute;
     top: 30px;
     left: 30px;
@@ -46,7 +43,7 @@
     animation: rotate28 2s linear infinite reverse;
   }
   
-  .loader .inner {
+  .roulette .inner {
     position: absolute;
     top: 60px;
     left: 60px;
@@ -60,7 +57,7 @@
     animation: rotate28 2s linear infinite;
   }
   
-  .loader .circle {
+  .roulette .circle {
     position: absolute;
     top: 90px;
     right: 90px;

@@ -1,8 +1,8 @@
 .name-list-container {
-  width: 300px;
+  width: 275px;
   height: 500px;
   overflow-y: auto;
-  position: absolute;
+  position: fixed;
   right: 0;
 }
 
@@ -15,6 +15,7 @@
 }
 
 .name-list-container::-webkit-scrollbar-thumb {
+  height: 160px;
   background: linear-gradient(180deg, $red 0%, $secondary-color 50%); 
 }
 
@@ -69,7 +70,9 @@
   font-size: 20px;
   font-weight: bold;
   margin-bottom: $spacing-medium;
-  
+  position: fixed;
+  right: 100px;
+  top: 180px;
 }
 .name-list {
   display: flex;
