@@ -68,6 +68,30 @@ function App() {
     }, 3000);
   };
 
+  // Function to generate CSV content from pairing results
+  const generateCSV = () => {
+    const csvContent = pairings.map(pair => pair.join(',')).join('\n');
+    return csvContent;
+  };
+
+  // Function to handle download button click
+  const handleDownload = () => {
+    const csvContent = generateCSV();
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a temporary anchor element to trigger the download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'pairings.csv';
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up by revoking the URL
+    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  };
+
   return (
     <div className="App">
       {isLoading ? (
@@ -105,6 +129,7 @@ function App() {
                   </div>
                 ))
               )}
+              {!rouletteLoading && pairings.length > 0 && <button className="pairing-result download-button" onClick={handleDownload}>Download Groups</button>}
             </div>
           </div>
           <div className="footer-container">
