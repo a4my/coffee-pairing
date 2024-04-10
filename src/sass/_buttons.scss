@@ -1,7 +1,5 @@
 .buttons-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include displayFlex;
   margin-top: 30px;
 
 
@@ -12,6 +10,7 @@
 
 .button-action {
   @include button-styles;
+  cursor: pointer;
 
   &:hover {
     background-position: 100% 0;
@@ -36,6 +35,7 @@
   color: $secondary-color;
   font-weight: bold;
   margin-left: $spacing-medium;
+  cursor: pointer;
 
   &:hover {
     background-color: $secondary-color;
