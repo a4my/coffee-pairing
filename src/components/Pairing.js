@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Pair2 from '../img/2-persons.svg';
 import Pair3 from '../img/3-persons.svg';
 import Pair4 from '../img/4-persons.svg';
 
 function Pairing({ names, onPair }) {
   const [pairingSize, setPairingSize] = useState(2);
+  const [firstRender, setFirstRender] = useState(true);
+
+  useEffect(() => {
+    if (!firstRender) {
+      handlePair();
+    } else {
+      setFirstRender(false);
+    }
+  }, [pairingSize]); // Trigger handlePair() when pairingSize changes
 
   const handlePair = () => {
     const availableNames = [...names];
@@ -29,7 +38,6 @@ function Pairing({ names, onPair }) {
 
   const handlePairingSize = (size) => {
     setPairingSize(size);
-    handlePair();
   };
 
   return (
