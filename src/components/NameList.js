@@ -1,5 +1,4 @@
-// NameList.js
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import userIcon from '../img/user-icon.svg';
 import userIconWhite from '../img/user-icon-white.svg';
 import userIconHover from '../img/user-icon-hover.svg';
@@ -7,10 +6,11 @@ import plusSymbolWhite from '../img/plus-symbol.svg';
 import plusSymbolHover from '../img/plus-symbol-hover.svg';
 import warningIcon from '../img/warning.svg';
 
-function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage, clearErrorMessage }) {
+function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage, clearErrorMessage, removeAllNames }) {
   const [newName, setNewName] = useState('');
   const [isHovered, setIsHovered] = useState(false);
   const [isPlusHovered, setIsPlusHovered] = useState(false);
+  const listContainerRef = useRef(null);
 
   const handleInputChange = e => {
     setNewName(e.target.value);
@@ -30,7 +30,6 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
       setNewName('');
     }
   };
-  
 
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
@@ -54,8 +53,16 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
     setIsPlusHovered(false); 
   };
 
+  // Scroll to the bottom of the list when it updates
+  useEffect(() => {
+    const lastItem = listContainerRef.current.lastElementChild;
+    if (lastItem) {
+      lastItem.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [names]);
+
   return (
-    <div className="name-list-container">
+    <div>
       <div className="input-container">
         <button
           className="button-action button-input"
@@ -84,20 +91,30 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
         </button>
       {errorMessage && <div className="error-message"><img src={warningIcon} className='warning-icon' alt='warning icon'/>{errorMessage}</div>}
       </div>
-      <ul className="name-list">
-        {names.map((name, index) => (
-          <li key={index} className="name-item">
-            <img src={userIcon} alt="user icon" className="user-icon" />
-            {name}
-            <button
-              className="button-x-remove"
-              onClick={() => onRemoveName(index)}
-            >
-              X
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className="name-list-container">
+        <div className='list-item-container'>
+            <div className='list-item'>
+            {names.length > 0 && <h2 className="list-title">Participants</h2>}
+              <ul ref={listContainerRef} className="name-list">
+                {names.map((name, index) => (
+                  <li key={index} className="name-item">
+                    <img src={userIcon} alt="user icon" className="user-icon" />
+                    {name}
+                    <button
+                      className="button-x-remove"
+                      onClick={() => onRemoveName(index)}
+                    >
+                      X
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          {names.length > 0 && <button className="button-action button-remove-all" onClick={removeAllNames}>
+                Remove All
+          </button>}
+      </div>
     </div>
   );
 }

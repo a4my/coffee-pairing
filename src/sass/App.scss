@@ -1,4 +1,3 @@
-
 @import 'variables';
 @import 'mixins';
 @import 'loader';
@@ -7,7 +6,6 @@
 @import 'footer';
 @import 'buttons';
 
-// App-specific styles
 .App {
   position: relative;
   text-align: center;
@@ -62,8 +60,8 @@
 /* App Content */
 .appContent {
   margin: 30px auto 0 auto;
-  max-width: 800px;
   height: auto;
+  position: relative;
 }
 
 

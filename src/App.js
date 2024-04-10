@@ -96,17 +96,9 @@ function App() {
           onAddAllNames={handleAddEmployees}
           errorMessage={errorMessage}
           clearErrorMessage={() => setErrorMessage('')}
+          removeAllNames={handleRemoveAllNames}
         />
-        <div className="buttons-container">
-          <button className="button-action" onClick={handleRemoveAllNames}>
-            Remove All
-          </button>
-          <Roulette onPairNames={handlePairNames} />
-          {/* <PairingsTable pairings={pairings} /> */}
-          <button className="button-action" onClick={handleResetPairings}>
-            Reset Pairings
-          </button>
-        </div>
+        
       </div>
       <div className="footer-container">
         <img src={footerImage} alt="Footer" className="footer" />
