@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NameList from './components/NameList';
 import Pairing from './components/Pairing';
 import Loader from './components/Loader';
-import PairingResultContainer from './components/PairingResultContainer';
+import RouletteLoader from './components/Roulette';
 import { loadNames, saveNames } from './utils';
 import { employeeList } from './employeeList';
 import everyoneTVLogo from './img/ETV_logo.svg';
@@ -114,12 +114,23 @@ function App() {
               removeAllNames={handleRemoveAllNames}
             />
             <Pairing names={names} onPair={handlePair} setIsLoading={setIsLoading}/>
-            <PairingResultContainer
-              rouletteLoading={rouletteLoading}
-              names={names}
-              pairings={pairings}
-              handleDownload={handleDownload}
-            />
+            <div className="pairing-result-container">
+              {rouletteLoading && names.length > 0 ? (
+                <RouletteLoader />
+              ) : (
+                pairings.map((pair, index) => (
+                  <div key={index} className="pairing-result">
+                    {pair.map((name, i) => (
+                      <React.Fragment key={i}>
+                        {name}
+                        {i !== pair.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                ))
+              )}
+              {!rouletteLoading && pairings.length > 0 && <button className="pairing-result download-button" onClick={handleDownload}>Download Groups</button>}
+            </div>
           </div>
           <div className="footer-container">
             <img src={footerImage} alt="Footer" className="footer" />
