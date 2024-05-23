@@ -89,7 +89,7 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
             alt="add all employees"
           />
         </button>
-      {errorMessage && <div className="error-message"><img src={warningIcon} className='warning-icon' alt='warning icon'/>{errorMessage}</div>}
+        {errorMessage && <div className="error-message"><img src={warningIcon} className='warning-icon' alt='warning icon'/>{errorMessage}</div>}
       </div>
       <div className="name-list-container">
         <div className='list-item-container'>
