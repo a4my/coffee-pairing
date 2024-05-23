@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import * as XLSX from 'xlsx';
 import NameList from './components/NameList';
 import Pairing from './components/Pairing';
 import Loader from './components/Loader';
@@ -16,6 +17,9 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [rouletteLoading, setRouletteLoading] = useState(false); 
+  const lastResultRef = useRef(null);
+
+  console.log(lastResultRef)
 
   useEffect(() => {
     setTimeout(() => {
@@ -66,27 +70,63 @@ function App() {
     setTimeout(() => {
       setRouletteLoading(false);
     }, 3000);
-  };
-
-  // Function to generate CSV content from pairing results
-  const generateCSV = () => {
-    const csvContent = pairings.map(pair => pair.join(',')).join('\n');
-    return csvContent;
+    const lastItem = lastResultRef.current;
+    console.log(lastItem)
+    if (lastItem) {
+      lastItem.scrollIntoView({ behavior: 'smooth' });
+    }
+    console.log(lastItem)
   };
 
   // Function to handle download button click
   const handleDownload = () => {
-    const csvContent = generateCSV();
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-
+    // Convert the pairings to a worksheet format
+    const worksheetData = pairings.map(pair => pair);
+  
+    // Create a new workbook and add the worksheet
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+  
+    // Calculate the maximum length for each column
+    const colWidths = [];
+    pairings.forEach(pair => {
+      pair.forEach((name, colIndex) => {
+        const nameLength = name.length;
+        if (!colWidths[colIndex] || colWidths[colIndex] < nameLength) {
+          colWidths[colIndex] = nameLength;
+        }
+      });
+    });
+  
+    // Set column widths, adding some extra space for margin
+    worksheet['!cols'] = colWidths.map(width => ({ wch: width + 2 }));
+  
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Pairings');
+  
+    // Generate a binary string representation of the workbook
+    const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+  
+    // Convert the binary string to a Blob
+    const s2ab = s => {
+      const buf = new ArrayBuffer(s.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i < s.length; i++) {
+        view[i] = s.charCodeAt(i) & 0xFF;
+      }
+      return buf;
+    };
+  
+    const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+  
     // Create a temporary anchor element to trigger the download
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'pairings.csv';
+    a.download = 'pairings.xlsx';
     document.body.appendChild(a);
     a.click();
-
+  
     // Clean up by revoking the URL
     URL.revokeObjectURL(url);
     document.body.removeChild(a);
@@ -119,7 +159,7 @@ function App() {
                 <RouletteLoader />
               ) : (
                 pairings.map((pair, index) => (
-                  <div key={index} className="pairing-result">
+                  <div key={index} className="pairing-result" ref={pairings.length - 1 === index ? lastResultRef : null}>
                     {pair.map((name, i) => (
                       <React.Fragment key={i}>
                         {name}
