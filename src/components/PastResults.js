@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const PastResults = ({ pastResults, onDeleteResultFromLocalStorage }) => {
+const PastResults = ({ pastResults, onDeleteResultFromLocalStorage, removeAllResults }) => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
@@ -36,10 +36,10 @@ const PastResults = ({ pastResults, onDeleteResultFromLocalStorage }) => {
   return (
     <div className="pastResults-container">
       {results.length > 0 && <h2 className='pastResults-title'>Past Results</h2>}
-      <ul>
+      <ul className='results-list'>
         {results.map((result, index) => (
           <li className='result-item' key={index}>
-            <button onClick={() => handleDownload(result.data, result.filename)}>
+            <button className='download-button' onClick={() => handleDownload(result.data, result.filename)}>
               <span>{result.UIName}</span>
             </button>
             <button
@@ -54,6 +54,9 @@ const PastResults = ({ pastResults, onDeleteResultFromLocalStorage }) => {
           </li>
         ))}
       </ul>
+      {results.length >= 7 && <button className="button-action button-remove-all-results" onClick={removeAllResults}>
+                Remove All
+          </button>}
     </div>
   );
 };

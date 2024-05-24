@@ -158,6 +158,11 @@ function App() {
     savePastResults(updatedPastResults);
   };
 
+  const handleRemoveAllResults = () => {
+    setPastResults([]);
+    savePastResults([]);
+  };
+
   return (
     <div className="App">
       {isLoading ? (
@@ -179,7 +184,11 @@ function App() {
               clearErrorMessage={() => setErrorMessage('')}
               removeAllNames={handleRemoveAllNames}
             />
-            <PastResults pastResults={pastResults} onDeleteResultFromLocalStorage={handleRemoveResult} />
+            <PastResults 
+              pastResults={pastResults} 
+              onDeleteResultFromLocalStorage={handleRemoveResult} 
+              removeAllResults={handleRemoveAllResults}
+            />
             <Pairing names={names} onPair={handlePair} setIsLoading={setIsLoading}/>
             <div className="pairing-result-container">
               {rouletteLoading && names.length > 0 ? (

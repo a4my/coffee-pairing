@@ -1,9 +1,26 @@
 .pastResults-container {
-    width: 275px;
+    width: 250px;
     height: 500px;
     overflow-y: auto;
     position: fixed;
     right: 20px;
+  }
+
+  .pastResults-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .pastResults-container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  .pastResults-container::-webkit-scrollbar-thumb {
+    height: 160px;
+    background: linear-gradient(180deg, $red 0%, $secondary-color 50%); 
+  }
+  
+  .pastResults-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(3600deg, $red 0%, $secondary-color 50%);
   }
 
   .pastResults-title {
@@ -30,16 +47,18 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     padding: 10px;
     
-    color: #888;
     display: flex;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ccc;
-
-    button {
+    
+    .download-button {
       cursor: pointer;
       background-color: white;
       border: none;
       text-align: center;
+      color: #888;
+      font-family: $body-font;
+      font-size: 16px;
     }
   }
