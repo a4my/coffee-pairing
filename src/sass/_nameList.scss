@@ -4,6 +4,11 @@
   overflow-y: auto;
   position: fixed;
   left: 20px;
+  direction: rtl;
+
+  & > * {
+    direction: ltr;
+  }
 }
 
 .name-list-container::-webkit-scrollbar {
@@ -25,7 +30,7 @@
 
 .input-container {
   @include displayFlex;
-  margin-bottom: $spacing-medium;
+  margin-bottom: 20px;
   position: relative;
 }
 
