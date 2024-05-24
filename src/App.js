@@ -4,7 +4,8 @@ import NameList from './components/NameList';
 import Pairing from './components/Pairing';
 import Loader from './components/Loader';
 import RouletteLoader from './components/Roulette';
-import { loadNames, saveNames } from './utils';
+import PastResults from './components/PastResults';
+import { loadNames, saveNames, loadPastResults, savePastResults } from './utils';
 import { employeeList } from './employeeList';
 import everyoneTVLogo from './img/ETV_logo.svg';
 import footerImage from './img/ETV_footer.png';
@@ -17,9 +18,8 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [rouletteLoading, setRouletteLoading] = useState(false); 
+  const [pastResults, setPastResults] = useState([]);
   const lastResultRef = useRef(null);
-
-  console.log(lastResultRef)
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,6 +30,11 @@ function App() {
   useEffect(() => {
     const storedNames = loadNames();
     setNames(storedNames);
+  }, []);
+
+  useEffect(() => {
+    const storedResults = loadPastResults();
+    setPastResults(storedResults);
   }, []);
 
   const handleAddName = (name) => {
@@ -78,16 +83,23 @@ function App() {
     console.log(lastItem)
   };
 
-  // Function to handle download button click
-  const handleDownload = () => {
-    // Convert the pairings to a worksheet format
+  // Function to format the date
+  const formatDate = (date) => {
+    const options = { 
+      day: 'numeric', 
+      month: 'long', 
+      hour: 'numeric', 
+      minute: 'numeric',
+      hour12: true
+    };
+    return date.toLocaleDateString('en-US', options).replace(',', ' at');
+  };
+
+  const handleResultDownload = () => {
     const worksheetData = pairings.map(pair => pair);
-  
-    // Create a new workbook and add the worksheet
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
   
-    // Calculate the maximum length for each column
     const colWidths = [];
     pairings.forEach(pair => {
       pair.forEach((name, colIndex) => {
@@ -98,16 +110,10 @@ function App() {
       });
     });
   
-    // Set column widths, adding some extra space for margin
     worksheet['!cols'] = colWidths.map(width => ({ wch: width + 2 }));
-  
-    // Add the worksheet to the workbook
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Pairings');
   
-    // Generate a binary string representation of the workbook
     const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
-  
-    // Convert the binary string to a Blob
     const s2ab = s => {
       const buf = new ArrayBuffer(s.length);
       const view = new Uint8Array(buf);
@@ -118,18 +124,38 @@ function App() {
     };
   
     const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-  
-    // Create a temporary anchor element to trigger the download
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = 'pairings.xlsx';
     document.body.appendChild(a);
     a.click();
-  
-    // Clean up by revoking the URL
     URL.revokeObjectURL(url);
     document.body.removeChild(a);
+  
+    // Convert ArrayBuffer to Base64 string
+    const buffer = s2ab(wbout);
+    const base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)));
+    const readableDate = formatDate(new Date());
+  
+    // Save the result in local storage as a base64 string
+    const newResult = {
+      UIName: `${readableDate}`,
+      filename: `pairings_${formatDate(new Date())}.xlsx`,
+      data: base64String
+    };
+    const updatedResults = [...pastResults, newResult];
+    localStorage.setItem('pastResults', JSON.stringify(updatedResults));
+  
+    // Update state with the new result
+    setPastResults(updatedResults);
+  };
+
+  const handleRemoveResult = (index) => {
+    const updatedPastResults = [...pastResults];
+    updatedPastResults.splice(index, 1);
+    setPastResults(updatedPastResults);
+    savePastResults(updatedPastResults);
   };
 
   return (
@@ -153,6 +179,7 @@ function App() {
               clearErrorMessage={() => setErrorMessage('')}
               removeAllNames={handleRemoveAllNames}
             />
+            <PastResults pastResults={pastResults} onDeleteResultFromLocalStorage={handleRemoveResult} />
             <Pairing names={names} onPair={handlePair} setIsLoading={setIsLoading}/>
             <div className="pairing-result-container">
               {rouletteLoading && names.length > 0 ? (
@@ -169,7 +196,7 @@ function App() {
                   </div>
                 ))
               )}
-              {!rouletteLoading && pairings.length > 0 && <button className="pairing-result download-button" onClick={handleDownload}>Download Groups</button>}
+              {!rouletteLoading && pairings.length > 0 && <button className="pairing-result download-button" onClick={handleResultDownload}>Download Groups</button>}
             </div>
           </div>
           <div className="footer-container">

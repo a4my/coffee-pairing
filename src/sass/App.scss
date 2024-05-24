@@ -3,6 +3,7 @@
 @import 'loader';
 @import 'globals';
 @import 'nameList';
+@import 'pastResults';
 @import 'footer';
 @import 'buttons';
 @import 'pairing';
@@ -35,9 +36,9 @@
 
 /* Logo */
 .logo {
-  position: absolute;
+  position: fixed;
   left: 40px;
-  top: -20px;
+  top: 40px;
   height: 60px;
 }
 

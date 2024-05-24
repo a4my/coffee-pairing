@@ -1,0 +1,45 @@
+.pastResults-container {
+    width: 275px;
+    height: 500px;
+    overflow-y: auto;
+    position: fixed;
+    right: 20px;
+  }
+
+  .pastResults-title {
+    color: $primary-color;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: $spacing-medium;
+    position: fixed;
+    right: 100px;
+    top: 160px;
+  }
+
+  .results-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .result-item {
+    border-radius: 10px;
+    margin: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    
+    color: #888;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+
+    button {
+      cursor: pointer;
+      background-color: white;
+      border: none;
+      text-align: center;
+    }
+  }
