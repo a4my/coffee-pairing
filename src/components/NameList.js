@@ -111,7 +111,7 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
               </ul>
             </div>
           </div>
-          {names.length > 0 && <button className="button-action button-remove-all" onClick={removeAllNames}>
+          {names.length > 0 && <button className="button-action button-remove-all-name" onClick={removeAllNames}>
                 Remove All
           </button>}
       </div>
