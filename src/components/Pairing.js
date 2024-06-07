@@ -47,6 +47,7 @@ function Pairing({ names, onPair }) {
 
   return (
     <div className="pairing-container">
+      <h1 className='pairing-title'>Let's get people together!</h1>
       <div className="pairing-size-buttons">
         <button
           className='button-pairing'
