@@ -87,7 +87,6 @@ export const employeeList = [
     {name: 'Nicole Madden'},
     {name: 'Olivia May'},
     {name: 'Orf Warr'},
-    {name: 'Owen Jenkinson'},
     {name: 'Paul Roberts'},
     {name: 'Paul Walker'},
     {name: 'Pawel Rafalowski'},
