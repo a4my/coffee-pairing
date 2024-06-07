@@ -2,7 +2,8 @@
   width: 275px;
   height: 500px;
   overflow-y: auto;
-  position: fixed;
+  position: absolute;
+  top: 0;
   left: 20px;
   direction: rtl;
 
@@ -35,23 +36,24 @@
 }
 
 .input-container input {
-  border: 2px solid $primary-color;
-  border-radius: 30px;
-  padding: $spacing-medium $spacing-large;
+  border: 4px solid $primary-color;
+  border-radius: 50px;
+  padding: 20px 40px;
   margin: $spacing-medium;
   width: 25%;
+  height: 30px;
   color: $primary-color;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
+  cursor: pointer;
   
   &:focus {
     outline: none;
-    border: 2px solid $primary-color;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
 
   &::placeholder {
-    color: $light-gray;
+    color: #ff01808b;
   }
 }
 
@@ -60,23 +62,25 @@
 }
 
 .error-message {
+  font-size: 24px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  color: #ff017e;
-  bottom: -15px;
+  color: $primary-color;
+  bottom: -40px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .list-title {
+  @include box-shadow;
   color: $primary-color;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
   margin-bottom: $spacing-medium;
   position: fixed;
-  left: 100px;
+  left: 80px;
   top: 160px;
 }
 

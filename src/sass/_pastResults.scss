@@ -2,7 +2,8 @@
     width: 250px;
     height: 500px;
     overflow-y: auto;
-    position: fixed;
+    position: absolute;
+    top: 0;
     right: 20px;
   }
 
@@ -24,6 +25,7 @@
   }
 
   .pastResults-title {
+    @include box-shadow;
     color: $primary-color;
     font-size: 20px;
     font-weight: bold;

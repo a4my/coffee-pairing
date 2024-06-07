@@ -1,5 +1,9 @@
-@mixin box-shadow($x, $y, $blur, $color) {
-    box-shadow: $x $y $blur $color;
+@mixin custom-box-shadow($x, $y, $blur, $color) {
+  box-shadow: $x $y $blur $color;
+}
+
+@mixin box-shadow {
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 @mixin displayFlex {
