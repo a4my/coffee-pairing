@@ -54,7 +54,7 @@ const PairingResultModal = ({ isOpen, pairings, onClose, onDownloadResults }) =>
                 </div>
               ))}
               <button className="pairing-result download-button" onClick={onDownloadResults}>
-                Download Results
+                Save & Download
               </button>
             </>
           )}

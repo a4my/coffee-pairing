@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     z-index: 1000;
-    background: radial-gradient(ellipse at center, #fff 0%, #f0f0f0 100%);
+    background: radial-gradient(ellipse at center, $white 0%, $light-gray 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,8 +38,8 @@
     left: 30px;
     right: 30px;
     bottom: 30px;
-    border-left: 5px solid #ec008c;
-    border-right: 5px solid #ec008c;
+    border-left: 5px solid $secondary-color;
+    border-right: 5px solid $secondary-color;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-radius: 50%;
@@ -66,7 +66,7 @@
     right: 90px;
     left: 90px;
     bottom: 90px;
-    background-color: #ec008c;
+    background-color: $secondary-color;
     border-radius: 50%;
   }
   
