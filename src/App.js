@@ -3,8 +3,8 @@ import * as XLSX from 'xlsx';
 import NameList from './components/NameList';
 import Pairing from './components/Pairing';
 import Loader from './components/Loader';
-import RouletteLoader from './components/Roulette';
 import PastResults from './components/PastResults';
+import PairingResultModal from './components/PairingResultModal';
 import { loadNames, saveNames, loadPastResults, savePastResults } from './utils';
 import { employeeList } from './employeeList';
 import everyoneTVLogo from './img/ETV_logo.svg';
@@ -17,7 +17,7 @@ function App() {
   const [pairings, setPairings] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [rouletteLoading, setRouletteLoading] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [pastResults, setPastResults] = useState([]);
   const lastResultRef = useRef(null);
 
@@ -43,7 +43,7 @@ function App() {
       saveNames([...names, name]);
       setErrorMessage('');
     } else {
-      setErrorMessage('Name already exists in the list.');
+      setErrorMessage('Name already exists in the list!');
       setTimeout(() => {
         setErrorMessage('');
       }, 3000);
@@ -58,8 +58,7 @@ function App() {
   };
 
   const handleAddEmployees = () => {
-    let allEmployeeNames = employeeList.map((employee) => employee.name); 
-    // setNames(employeeList.map((employee) => employee.name));
+    let allEmployeeNames = employeeList.map((employee) => employee.name);
     setNames(allEmployeeNames);
     saveNames(allEmployeeNames);
   };
@@ -71,19 +70,13 @@ function App() {
 
   const handlePair = (pairs) => {
     setPairings(pairs);
-    setRouletteLoading(true);
-    setTimeout(() => {
-      setRouletteLoading(false);
-    }, 3000);
+    setIsModalOpen(true); // Open the modal after pairing is done
     const lastItem = lastResultRef.current;
-    console.log(lastItem)
     if (lastItem) {
       lastItem.scrollIntoView({ behavior: 'smooth' });
     }
-    console.log(lastItem)
   };
 
-  // Function to format the date
   const formatDate = (date) => {
     const options = { 
       day: 'numeric', 
@@ -99,7 +92,7 @@ function App() {
     const worksheetData = pairings.map(pair => pair);
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-  
+
     const colWidths = [];
     pairings.forEach(pair => {
       pair.forEach((name, colIndex) => {
@@ -109,10 +102,10 @@ function App() {
         }
       });
     });
-  
+
     worksheet['!cols'] = colWidths.map(width => ({ wch: width + 2 }));
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Pairings');
-  
+
     const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
     const s2ab = s => {
       const buf = new ArrayBuffer(s.length);
@@ -122,7 +115,7 @@ function App() {
       }
       return buf;
     };
-  
+
     const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -132,13 +125,11 @@ function App() {
     a.click();
     URL.revokeObjectURL(url);
     document.body.removeChild(a);
-  
-    // Convert ArrayBuffer to Base64 string
+
     const buffer = s2ab(wbout);
     const base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)));
     const readableDate = formatDate(new Date());
-  
-    // Save the result in local storage as a base64 string
+
     const newResult = {
       UIName: `${readableDate}`,
       filename: `pairings_${formatDate(new Date())}.xlsx`,
@@ -146,8 +137,7 @@ function App() {
     };
     const updatedResults = [...pastResults, newResult];
     localStorage.setItem('pastResults', JSON.stringify(updatedResults));
-  
-    // Update state with the new result
+
     setPastResults(updatedResults);
   };
 
@@ -172,7 +162,7 @@ function App() {
           <img src={everyoneTVLogo} alt="EveryoneTV Logo" className="logo" />
           <div className="title-container">
             <h1 className="appTitle">ETV Coffee Roulette</h1>
-            <img src={cupLogo} alt="cup logo" className="logo-cup" />
+            <img src={cupLogo} alt="cup logo" className="logo-cup" />   
           </div>
           <div className="appContent">
             <NameList
@@ -189,30 +179,19 @@ function App() {
               onDeleteResultFromLocalStorage={handleRemoveResult} 
               removeAllResults={handleRemoveAllResults}
             />
-            <Pairing names={names} onPair={handlePair} setIsLoading={setIsLoading}/>
-            <div className="pairing-result-container">
-              {rouletteLoading && names.length > 0 ? (
-                <RouletteLoader />
-              ) : (
-                pairings.map((pair, index) => (
-                  <div key={index} className="pairing-result" ref={pairings.length - 1 === index ? lastResultRef : null}>
-                    {pair.map((name, i) => (
-                      <React.Fragment key={i}>
-                        {name}
-                        {i !== pair.length - 1 && <br />}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                ))
-              )}
-              {!rouletteLoading && pairings.length > 0 && <button className="pairing-result download-button" onClick={handleResultDownload}>Download Groups</button>}
-            </div>
+            <Pairing names={names} onPair={handlePair} setIsLoading={setIsLoading} />
           </div>
           <div className="footer-container">
             <img src={footerImage} alt="Footer" className="footer" />
           </div>
         </>
       )}
+      <PairingResultModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        onDownloadResults={handleResultDownload}
+        pairings={pairings} 
+      />
     </div>
   );
 }

@@ -1,21 +1,33 @@
-.loader-container {
+  .loader-container {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    background: radial-gradient(ellipse at center, #fff 0%, #f0f0f0 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: radial-gradient(ellipse at center, $white 0%, $light-gray 100%);
+    @include displayFlex;
     height: 100%;
-    width: 100vw;
+    width: 100%;
   }
   
   .loader {
-    margin-top: 100px;
-    width: 200px;
-    height: 200px;
+    margin-top: 40px;
+    width: 450px;
+    height: 450px;
     position: relative;
+  }
+  
+  .loader .extra-outer {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    right: -50px;
+    bottom: -50px;
+    border-left: 5px solid lighten($primary-color, 20%);
+    border-right: 5px solid lighten($primary-color, 20%);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-radius: 50%;
+    animation: rotate28 2s linear infinite reverse;
   }
   
   .loader .outer {
@@ -24,22 +36,22 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border-left: 5px solid #ff017e;
-    border-right: 5px solid #ff017e;
+    border-left: 5px solid $primary-color;
+    border-right: 5px solid $primary-color;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-radius: 50%;
-    animation: rotate28 2s linear infinite;
+    animation: rotate28 4s linear infinite;
   }
   
   .loader .middle {
     position: absolute;
-    top: 30px;
-    left: 30px;
-    right: 30px;
-    bottom: 30px;
-    border-left: 5px solid #ec008c;
-    border-right: 5px solid #ec008c;
+    top: 67.5px;
+    left: 67.5px;
+    right: 67.5px;
+    bottom: 67.5px;
+    border-left: 5px solid $secondary-color;
+    border-right: 5px solid $secondary-color;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-radius: 50%;
@@ -48,12 +60,12 @@
   
   .loader .inner {
     position: absolute;
-    top: 60px;
-    left: 60px;
-    right: 60px;
-    bottom: 60px;
-    border-left: 5px solid #ff017e;
-    border-right: 5px solid #ff017e;
+    top: 135px;
+    left: 135px;
+    right: 135px;
+    bottom: 135px;
+    border-left: 5px solid lighten($primary-color, 20%);
+    border-right: 5px solid lighten($primary-color, 20%);
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-radius: 50%;
@@ -62,11 +74,11 @@
   
   .loader .circle {
     position: absolute;
-    top: 90px;
-    right: 90px;
-    left: 90px;
-    bottom: 90px;
-    background-color: #ec008c;
+    top: 202.5px;
+    right: 202.5px;
+    left: 202.5px;
+    bottom: 202.5px;
+    background-color: $secondary-color;
     border-radius: 50%;
   }
   

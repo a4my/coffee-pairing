@@ -77,7 +77,7 @@ function NameList({ names, onAddName, onRemoveName, onAddAllNames, errorMessage,
         </button>
         <input
           type="text"
-          placeholder="Add a name"
+          placeholder="Add a colleague..."
           value={newName}
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}

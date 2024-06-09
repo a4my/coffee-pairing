@@ -1,7 +1,17 @@
 .pairing-container {
-    width: 700px;
-    height: 250px;
+    width: 750px;
+    height: 280px;
     margin: 0 auto 20px auto;
+
+    .pairing-title {
+        @include box-shadow;   
+        color: $primary-color;
+        font-size: 42px;
+        font-weight: bold;
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+
 
     .pairing-size-buttons {
         @include displayFlex;
@@ -30,35 +40,3 @@
     }
 }
 
-.pairing-result-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 40px auto 100px auto;
-    width: 900px;
-
-    @media screen and (min-width: 1650px) {
-        width: 1000px;
-    }
-  
-    .pairing-result {
-      background-color: #f1f1f1;
-      align-content: center;
-      border-radius: 4px;
-      padding: 10px 15px;
-      margin: 10px;
-      font-size: 16px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-
-      &:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
-
-    }
-    .download-button {
-      background-color: #ff017e !important;
-      outline: none;
-      color: $white;
-      border: none;
-    }
-  }

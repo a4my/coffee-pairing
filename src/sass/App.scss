@@ -4,6 +4,7 @@
 @import 'globals';
 @import 'nameList';
 @import 'pastResults';
+@import 'pairingResultModal';
 @import 'footer';
 @import 'buttons';
 @import 'pairing';
@@ -38,9 +39,9 @@
 .logo {
   position: fixed;
   left: 40px;
-  top: 40px;
-  height: 60px;
-  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+  top: 20px;
+  height: 80px;
+  @include box-shadow;
 
 }
 
@@ -49,19 +50,28 @@
   @include displayFlex;
   margin-top: 50px;
 }
+.subtitle-container {
+  @include displayFlex;
+  margin-top: 10px;
+}
 
 .appTitle,
 .paringTitle,
 .rouletteTitle,
 .name-title {
   color: $primary-color;
-  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+  @include box-shadow;
+}
+
+.appTitle {
+  font-size: 60px;
+  font-weight: bold;
 }
 
 .logo-cup {
   margin-left: 10px;
   padding-bottom: 10px;
-  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+  @include box-shadow;
 }
 
 /* App Content */
