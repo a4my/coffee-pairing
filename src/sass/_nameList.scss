@@ -68,9 +68,7 @@
   transform: translateX(-50%);
   color: $primary-color;
   bottom: -40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include displayFlex;
 }
 
 .list-title {

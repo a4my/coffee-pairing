@@ -1,7 +1,5 @@
 .roulette-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include displayFlex;
   height: 100%;
   width: 100%;
 }
