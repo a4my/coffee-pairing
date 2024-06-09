@@ -8,8 +8,8 @@
 
 .roulette {
   margin-top: 40px;
-  width: 450px;  // Increased size by 50%
-  height: 450px;  // Increased size by 50%
+  width: 450px;
+  height: 450px;
   position: relative;
 }
 
@@ -43,10 +43,10 @@
 
 .roulette .middle {
   position: absolute;
-  top: 67.5px;  // Adjusted for larger size by 50%
-  left: 67.5px;  // Adjusted for larger size by 50%
-  right: 67.5px;  // Adjusted for larger size by 50%
-  bottom: 67.5px;  // Adjusted for larger size by 50%
+  top: 67.5px;
+  left: 67.5px;
+  right: 67.5px;
+  bottom: 67.5px;
   border-left: 5px solid $secondary-color;
   border-right: 5px solid $secondary-color;
   border-top: 5px solid transparent;
@@ -57,10 +57,10 @@
 
 .roulette .inner {
   position: absolute;
-  top: 135px;  // Adjusted for larger size by 50%
-  left: 135px;  // Adjusted for larger size by 50%
-  right: 135px;  // Adjusted for larger size by 50%
-  bottom: 135px;  // Adjusted for larger size by 50%
+  top: 135px;
+  left: 135px;
+  right: 135px;
+  bottom: 135px;
   border-left: 5px solid lighten($primary-color, 20%);
   border-right: 5px solid lighten($primary-color, 20%);
   border-top: 5px solid transparent;
@@ -71,10 +71,10 @@
 
 .roulette .circle {
   position: absolute;
-  top: 202.5px;  // Adjusted for larger size by 50%
-  right: 202.5px;  // Adjusted for larger size by 50%
-  left: 202.5px;  // Adjusted for larger size by 50%
-  bottom: 202.5px;  // Adjusted for larger size by 50%
+  top: 202.5px;
+  right: 202.5px;
+  left: 202.5px;
+  bottom: 202.5px;
   background-color: $secondary-color;
   border-radius: 50%;
 }
