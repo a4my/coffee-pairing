@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Roulette = () => {
+const Loader = () => {
   return (
-    <div className="roulette-container">
-      <div className="roulette">
+    <div className="loader-container">
+      <div className="loader">
         <div className="circle"></div>
         <div className="inner"></div>
         <div className="middle"></div>
@@ -14,4 +14,4 @@ const Roulette = () => {
   );
 };
 
-export default Roulette;
+export default Loader;

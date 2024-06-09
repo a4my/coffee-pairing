@@ -1,4 +1,4 @@
-  .roulette-container {
+  .loader-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,14 +9,14 @@
     width: 100%;
   }
   
-  .roulette {
+  .loader {
     margin-top: 40px;
     width: 450px;
     height: 450px;
     position: relative;
   }
   
-  .roulette .extra-outer {
+  .loader .extra-outer {
     position: absolute;
     top: -50px;
     left: -50px;
@@ -30,7 +30,7 @@
     animation: rotate28 2s linear infinite reverse;
   }
   
-  .roulette .outer {
+  .loader .outer {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +44,7 @@
     animation: rotate28 4s linear infinite;
   }
   
-  .roulette .middle {
+  .loader .middle {
     position: absolute;
     top: 67.5px;
     left: 67.5px;
@@ -58,7 +58,7 @@
     animation: rotate28 2s linear infinite reverse;
   }
   
-  .roulette .inner {
+  .loader .inner {
     position: absolute;
     top: 135px;
     left: 135px;
@@ -72,7 +72,7 @@
     animation: rotate28 2s linear infinite;
   }
   
-  .roulette .circle {
+  .loader .circle {
     position: absolute;
     top: 202.5px;
     right: 202.5px;
