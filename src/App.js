@@ -89,23 +89,44 @@ function App() {
   };
 
   const handleResultDownload = () => {
-    const worksheetData = pairings.map(pair => pair);
+    // Prepare the data with headers and group titles
+    const worksheetData = [
+      ['Pairing Results'], // Title row
+      ...pairings.map((pair, index) => [`Group ${index + 1}`, ...pair])
+    ];
+  
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-
+  
+    // Adjust column widths
     const colWidths = [];
-    pairings.forEach(pair => {
-      pair.forEach((name, colIndex) => {
-        const nameLength = name.length;
-        if (!colWidths[colIndex] || colWidths[colIndex] < nameLength) {
-          colWidths[colIndex] = nameLength;
+    worksheetData.forEach(row => {
+      row.forEach((cell, colIndex) => {
+        const cellLength = cell.length;
+        if (!colWidths[colIndex] || colWidths[colIndex] < cellLength) {
+          colWidths[colIndex] = cellLength;
         }
       });
     });
-
+  
     worksheet['!cols'] = colWidths.map(width => ({ wch: width + 2 }));
+  
+    // Add styling for the title row (Optional)
+    const titleRow = worksheet['A1'];
+    if (titleRow) {
+      titleRow.s = {
+        font: { sz: 14, bold: true },
+        alignment: { horizontal: 'center' },
+      };
+    }
+  
+    // Merge cells for the title row to span across all columns (Optional)
+    worksheet['!merges'] = [
+      { s: { r: 0, c: 0 }, e: { r: 0, c: worksheetData[1].length } }
+    ];
+  
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Pairings');
-
+  
     const wbout = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
     const s2ab = s => {
       const buf = new ArrayBuffer(s.length);
@@ -115,7 +136,7 @@ function App() {
       }
       return buf;
     };
-
+  
     const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -125,11 +146,11 @@ function App() {
     a.click();
     URL.revokeObjectURL(url);
     document.body.removeChild(a);
-
+  
     const buffer = s2ab(wbout);
     const base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)));
     const readableDate = formatDate(new Date());
-
+  
     const newResult = {
       UIName: `${readableDate}`,
       filename: `pairings_${formatDate(new Date())}.xlsx`,
@@ -137,7 +158,7 @@ function App() {
     };
     const updatedResults = [...pastResults, newResult];
     localStorage.setItem('pastResults', JSON.stringify(updatedResults));
-
+  
     setPastResults(updatedResults);
   };
 
