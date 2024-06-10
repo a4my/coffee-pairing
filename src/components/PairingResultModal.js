@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import RouletteLoader from './Roulette';
+// import RouletteLoader from './Roulette';
+import CoffeeAnimation from './CoffeeAnimation';
 
 const PairingResultModal = ({ isOpen, pairings, onClose, onDownloadResults }) => {
   const modalRef = useRef(null);
@@ -10,7 +11,7 @@ const PairingResultModal = ({ isOpen, pairings, onClose, onDownloadResults }) =>
       setShowLoader(true);
       setTimeout(() => {
         setShowLoader(false);
-      }, 3000);
+      }, 6000);
     }
   }, [isOpen]);
 
@@ -40,7 +41,7 @@ const PairingResultModal = ({ isOpen, pairings, onClose, onDownloadResults }) =>
         <span className="close" onClick={handleClose}>&times;</span>
         <div className="pairing-result-container">
           {showLoader ? (
-            <RouletteLoader />
+            <CoffeeAnimation />
           ) : (
             <>
               {pairings.map((pair, index) => (
