@@ -16,6 +16,7 @@ export const employeeList = [
     {name: 'Bob Standen'},
     {name: 'Carl Pfeiffer'},
     {name: 'Caroline Green'},
+    {name: 'Cassandra Edwards'},
     {name: 'Christina Thummanah'},
     {name: 'Claudia McGettigan'},
     {name: 'Dan Allen Delos Santos'},
