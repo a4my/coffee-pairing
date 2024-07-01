@@ -69,6 +69,7 @@ export const employeeList = [
     {name: 'Lava Baban'},
     {name: 'Lee Bassett-Huckstepp'},
     {name: 'Liz Reynolds'},
+    {name: 'Lorenzo Dicandia'},
     {name: 'Lorraine Karknett'},
     {name: 'Lucy Etherington'},
     {name: 'Luke Sluman'},
