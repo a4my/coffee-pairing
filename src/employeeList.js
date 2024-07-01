@@ -2,7 +2,7 @@ export const employeeList = [
     {name: 'Aftab Hussain'},
     {name: 'Alex Fourmy'},
     {name: 'Alex Russell'},
-    {name: 'Amy Green'},
+    // {name: 'Amy Green'}, // Opted out
     {name: 'Amy Rowcliffe'},
     {name: 'Andrew Keats'},
     {name: 'Andrey Lebedenko'},
