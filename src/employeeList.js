@@ -103,7 +103,6 @@ export const employeeList = [
     {name: 'Sarah Milton'},
     {name: 'Simon Oakley'},
     {name: 'Sneha Shah'},
-    {name: 'Solomon Oshinubi'},
     {name: 'Sophie Dudhill'},
     {name: 'Stacey Julien'},
     {name: 'Stephanie Humphreys'},
