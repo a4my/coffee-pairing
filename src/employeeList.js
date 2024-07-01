@@ -64,7 +64,7 @@ export const employeeList = [
     {name: 'Juanita Wyght'},
     {name: 'Kevin Newman'},
     {name: 'Kiertan Rourke'},
-    {name: 'Kristine Augustine-Cox'},
+    // {name: 'Kristine Augustine-Cox'},
     {name: 'Laura Alexander'},
     {name: 'Lava Baban'},
     {name: 'Lee Bassett-Huckstepp'},
