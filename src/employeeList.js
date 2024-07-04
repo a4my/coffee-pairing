@@ -110,7 +110,7 @@ export const employeeList = [
     {name: 'Steven Turkington'},
     {name: 'Tabitha Brooks'},
     {name: 'Tochi Tagbo'},
-    {name: 'Tristan Nelson'},
+    // {name: 'Tristan Nelson'}, // Opted out
     {name: 'Vinaya Pidaparthi'},
     {name: 'Yorick Moes'},
     {name: 'Yuktha Murthy'},
